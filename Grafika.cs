@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Grafika
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        public Pen pero = new Pen(Color.Black);
+        private void btn_cara_Click(object sender, EventArgs e)
+        {
+            Graphics grafika = pb_platno.CreateGraphics();
+            /*grafika.DrawLine(pero, 0, 0, 600, 400);
+            pero.Color = Color.Red;
+            grafika.DrawLine(pero, 600, 0, 0, 400);*/
+            pero.Color = Color.Black;
+            pero.Width = 5;
+            grafika.DrawLine(pero, 0, 200, 0, 201);
+            grafika.DrawLine(pero, 0, 200, 600, 200);
+            grafika.DrawLine(pero, 0, 0, 0, 400);
+            /* for (float x = 0; x < 180; x += (float)0.005)  
+             {
+                 if (x == 0) continue;
+                 float x1 = x;
+                 float y1 = 200 + 100*(float)Math.Sin(0.05 * x);
+                 float x2 = (float)(x1++);
+                 float y2 = (float)(y1++);
+                 grafika.DrawLine(pero,x1,y1,x2,y2);
+             }*/
+            float x0 = 0;
+            float y0 = 200;
+            float x2 = x0;
+            float y2 = y0;
+            float x, y;
+            for (int uhel = 0; uhel <= 360; uhel++)
+            {
+                x = x0 + uhel;
+                y = y0 - 100 * (float)Math.Sin(uhel * Math.PI / 180);
+                grafika.DrawLine(pero, x2, y2, x, y);
+                x2 = x;
+                y2 = y;
+            }
+        }
+    }
+}
